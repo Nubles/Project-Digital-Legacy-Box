@@ -1,0 +1,16 @@
+# Python / Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+.env
+
+# Node.js (covered by frontend/.gitignore, but good to have at root too)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
