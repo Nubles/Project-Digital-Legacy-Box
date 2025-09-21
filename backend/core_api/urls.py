@@ -4,6 +4,8 @@ from .views import (
     LegacyBoxListCreateView,
     LegacyBoxDetailView,
     MemoryListCreateView,
+    KeyholderCreateView,
+    KeyholderTriggerView,
 )
 
 urlpatterns = [
@@ -16,4 +18,8 @@ urlpatterns = [
 
     # Memories (nested under boxes)
     path('boxes/<int:box_id>/memories/', MemoryListCreateView.as_view(), name='memory-list-create'),
+
+    # Keyholders
+    path('boxes/<int:box_id>/keyholders/', KeyholderCreateView.as_view(), name='keyholder-create'),
+    path('keyholder/trigger/', KeyholderTriggerView.as_view(), name='keyholder-trigger'),
 ]

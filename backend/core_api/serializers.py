@@ -1,22 +1,30 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import LegacyBox, Memory
+from .models import LegacyBox, Memory, Keyholder
+
+
+class KeyholderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Keyholder
+        fields = ('id', 'email', 'key', 'created_at')
+        read_only_fields = ('key', 'created_at')
 
 
 class MemorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Memory
-        fields = ('id', 'box', 'content', 'created_at')
+        fields = ('id', 'box', 'memory_type', 'content', 'file', 'created_at')
         read_only_fields = ('box',)
 
 
 class LegacyBoxSerializer(serializers.ModelSerializer):
     memories = MemorySerializer(many=True, read_only=True)
+    keyholders = KeyholderSerializer(many=True, read_only=True)
     user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = LegacyBox
-        fields = ('id', 'user', 'name', 'recipient_email', 'release_date', 'created_at', 'updated_at', 'memories')
+        fields = ('id', 'user', 'name', 'recipient_email', 'release_date', 'created_at', 'updated_at', 'memories', 'keyholders')
 
 
 class UserSerializer(serializers.ModelSerializer):
